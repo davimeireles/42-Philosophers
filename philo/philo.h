@@ -29,16 +29,16 @@ typedef struct s_philosopher
 //	pthread_t	thread;
 	t_input		*p_info;
 	int			index;
-	int			eat;
+	int			meal;
 	int			think;
 	int			sleep;
 	int			fork;
 }	t_philosopher;
 
-/* main */
+/* Main */
 int		main(int argc, char **argv);
 
-/* validate input */
+/* Validate Input */
 void	p_error(t_error error);
 bool	check_num_args(int argc);
 bool	is_digit(char **argv);
@@ -50,7 +50,7 @@ void	init_philosophers_info(t_input *info, char **argv);
 void	fill_philosophers_info(t_input *info, char **argv);
 void	init_philosophers(t_input *info, t_philosopher *philosopher);
 
-/* utils */
+/* Utils */
 int		ft_atoi(char *str);
 long	ft_atol(char *str);
 
