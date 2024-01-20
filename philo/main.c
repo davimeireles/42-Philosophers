@@ -10,26 +10,27 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
-#include <pthread.h>
-#include <stdio.h>
+#include "philo.h"
 
-void *routine()
+int	main(int argc, char **argv)
 {
-	printf("Thread\n");
-	sleep(2);
-	printf("Finish\n");
-	return NULL;
-}
+	t_input	info;
+	t_philosopher *philosopher;
 
-int main()
-{
-	pthread_t t1;
-	pthread_t t2;
-
-	pthread_create(&t1, NULL, routine, NULL);
-	pthread_create(&t2, NULL, routine, NULL);
-	pthread_join(t1, NULL);
-	pthread_join(t2, NULL);
-	return 0;
+	check_input(argc, argv);
+	init_philosophers_info(&info, argv);
+	philosopher = malloc(sizeof(t_philosopher) * info.n_philosophers);
+	if (!philosopher)
+		return (0);
+	init_philosophers(&info, philosopher);
+	int i = 0;
+	while (i < info.n_philosophers)
+	{
+		printf("Index Philosopher = %d\nNumber of philosophers = %d\nTime to die = %d\nTime to eat = %d"
+			   "\nTime to sleep = %d\nNumber of times each philosophers must eat = %d\n"
+			   "",philosopher[i].index,philosopher[i].p_info->n_philosophers,philosopher[i].p_info->time_to_die,
+			   philosopher[i].p_info->time_to_eat,philosopher[i].p_info->time_to_sleep,
+			   philosopher[i].p_info->n_times_p_must_eat);
+		i++;
+	}
 }
