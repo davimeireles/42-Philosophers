@@ -29,11 +29,8 @@ void	init_philosophers(t_input *info, t_philosopher *philosopher)
 	i = 0;
 	while (i < info->n_philosophers)
 	{
-		philosopher[i].index = i;
-		philosopher[i].think = 0;
-		philosopher[i].sleep = 0;
-		philosopher[i].eat = 0;
-		philosopher[i].think = 0;
+		philosopher[i].index = i + 1;
+		philosopher[i].meal = 0;
 		philosopher[i].fork = 0;
 		philosopher[i].p_info = info;
 		i++;

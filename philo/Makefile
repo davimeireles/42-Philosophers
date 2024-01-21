@@ -1,6 +1,6 @@
 NAME= philo
 CC= gcc
-FLAGS= -Wall -Wextra -Werror -pthread -fsanitize=thread
+FLAGS= -Wall -Wextra -Werror -pthread #-fsanitize=thread
 SOURCE= *.c
 OBJECT= $(SOURCE:.c=.o)
 RM= rm -rf

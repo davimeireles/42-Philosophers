@@ -23,8 +23,10 @@ int	main(int argc, char **argv)
 	if (!philosopher)
 		return (0);
 	init_philosophers(&info, philosopher);
-	int i = 0;
-	while (i < info.n_philosophers)
+	threads(philosopher, &info);
+//	time_execution();
+//	int i = 0;
+/*	while (i < info.n_philosophers)
 	{
 		printf("Index Philosopher = %d\nNumber of philosophers = %d\nTime to die = %d\nTime to eat = %d"
 			   "\nTime to sleep = %d\nNumber of times each philosophers must eat = %d\n"
@@ -32,5 +34,6 @@ int	main(int argc, char **argv)
 			   philosopher[i].p_info->time_to_eat,philosopher[i].p_info->time_to_sleep,
 			   philosopher[i].p_info->n_times_p_must_eat);
 		i++;
-	}
+	}*/
+	free_struct_philosophers(philosopher);
 }
