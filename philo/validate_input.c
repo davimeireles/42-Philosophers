@@ -8,6 +8,8 @@ void	p_error(t_error error)
 		printf("Invalid parameter, only numbers accepted.\n");
 	if (error == RANGE_OR_NEGATIVE)
 		printf("Number out of the MAX_INT range or its neg/null.\n");
+	if (error == MALLOC_ERROR)
+		printf("Error in creat of the malloc.\n");
 	exit(EXIT_FAILURE);
 }
 

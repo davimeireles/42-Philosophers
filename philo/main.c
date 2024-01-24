@@ -15,15 +15,10 @@
 int	main(int argc, char **argv)
 {
 	t_input	info;
-	t_philosopher *philosopher;
 
 	check_input(argc, argv);
 	init_philosophers_info(&info, argv);
-	philosopher = malloc(sizeof(t_philosopher) * info.n_philosophers);
-	if (!philosopher)
-		return (0);
-	init_philosophers(&info, philosopher);
-	threads(philosopher, &info);
+	threads(info.philosophers, &info);
 //	time_execution();
 //	int i = 0;
 /*	while (i < info.n_philosophers)
@@ -35,5 +30,4 @@ int	main(int argc, char **argv)
 			   philosopher[i].p_info->n_times_p_must_eat);
 		i++;
 	}*/
-	free_struct_philosophers(philosopher);
 }

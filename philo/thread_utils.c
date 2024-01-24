@@ -1,7 +1,6 @@
 #include "philo.h"
 
-
-void	*creat_threads(t_philosopher *philosopher, t_input *info)
+void	creat_threads(t_philosopher *philosopher, t_input *info)
 {
 	int	i;
 	int	total_philosophers;
@@ -10,16 +9,15 @@ void	*creat_threads(t_philosopher *philosopher, t_input *info)
 	total_philosophers = info->n_philosophers;
 	philosopher->thread = malloc(sizeof(pthread_t) * total_philosophers);
 	if (!philosopher->thread)
-		return (NULL);
+		return ;
 	while (i < total_philosophers)
 	{
-		pthread_create(&philosopher->thread[i], NULL, &routine, &philosopher[i]);
+		pthread_create(philosopher->thread, NULL, &dinner, &philosopher[i]);
 		i++;
 	}
-	return (NULL);
 }
 
-void	*join_threads(t_philosopher *philosopher, t_input *info)
+void	join_threads(t_philosopher *philosopher, t_input *info)
 {
 	int	i;
 	int	total_philosophers;
@@ -28,17 +26,14 @@ void	*join_threads(t_philosopher *philosopher, t_input *info)
 	total_philosophers = info->n_philosophers;
 	while (i < total_philosophers)
 	{
-		pthread_join(philosopher->thread[i], 0);
+		pthread_join(philosopherthread, 0);
 		i++;
 	}
-	return (NULL);
 }
 
-void	*threads(t_philosopher *philosopher, t_input *info)
+void	threads(t_philosopher *philosopher, t_input *info)
 {
 	creat_threads(philosopher, info);
-	join_threads(philosopher, info);
-	printf("Meals = %d\n",philosopher->meal);
-	return (NULL);
+//	join_threads(philosopher, info);
 }
 

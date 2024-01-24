@@ -49,3 +49,15 @@ long	ft_atol(char *str)
 	}
 	return (result * signal);
 }
+
+void	op_handle(pthread_mutex_t *mutex, t_operation op)
+{
+	if (op == LOCK)
+		pthread_mutex_lock(mutex);
+	if (op == UNLOCK)
+		pthread_mutex_unlock(mutex);
+	if (op == INIT)
+		pthread_mutex_init(mutex, 0);
+	if (op == DESTROY)
+		pthread_mutex_destroy(mutex);
+}
