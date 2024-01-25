@@ -50,14 +50,24 @@ long	ft_atol(char *str)
 	return (result * signal);
 }
 
-void	op_handle(pthread_mutex_t *mutex, t_operation op)
+long get_mutex_long(t_philosopher *philo, long *data)
 {
-	if (op == LOCK)
-		pthread_mutex_lock(mutex);
-	if (op == UNLOCK)
-		pthread_mutex_unlock(mutex);
-	if (op == INIT)
-		pthread_mutex_init(mutex, 0);
-	if (op == DESTROY)
-		pthread_mutex_destroy(mutex);
+	long ret;
+
+	pthread_mutex_lock(&philo->table->access);
+	ret = *data;
+	pthread_mutex_unlock(&philo->table->access);
+
+	return (ret);
+}
+
+bool	get_mutex_bool(t_philosopher *philo, bool *data)
+{
+	bool ret;
+
+	pthread_mutex_lock(&philo->table->access);
+	ret = *data;
+	pthread_mutex_unlock(&philo->table->access);
+
+	return (ret);
 }

@@ -14,20 +14,18 @@
 
 int	main(int argc, char **argv)
 {
-	t_input	info;
+	t_table table;
+	t_philosopher *philo;
 
 	check_input(argc, argv);
-	init_philosophers_info(&info, argv);
-	threads(info.philosophers, &info);
-//	time_execution();
-//	int i = 0;
-/*	while (i < info.n_philosophers)
-	{
-		printf("Index Philosopher = %d\nNumber of philosophers = %d\nTime to die = %d\nTime to eat = %d"
-			   "\nTime to sleep = %d\nNumber of times each philosophers must eat = %d\n"
-			   "",philosopher[i].index,philosopher[i].p_info->n_philosophers,philosopher[i].p_info->time_to_die,
-			   philosopher[i].p_info->time_to_eat,philosopher[i].p_info->time_to_sleep,
-			   philosopher[i].p_info->n_times_p_must_eat);
-		i++;
-	}*/
+	init_table(&table, argv);
+/*	printf("Total Philosophers is %d\nTime to Die is %ld\nTime to Eat is %ld\n"
+		   "Time to Sleep is %ld\nEach Philosopher Must Eat %d Times\n"
+		   "Start Time is %ld\nCurrent Time is %ld\n",table.total_philos,table.time_to_die,table.time_to_eat,
+		   table.time_to_sleep,table.n_times_philo_must_eat,table.start_time,table.current_time);*/
+	philo = malloc(sizeof(t_philosopher) * table.total_philos);
+	if (!philo)
+		return (0);
+	init_philosophers(philo, &table);
+	threads(philo);
 }
