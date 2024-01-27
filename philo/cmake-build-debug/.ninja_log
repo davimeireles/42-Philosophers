@@ -1,0 +1,22 @@
+# ninja log v5
+5	82	1706381446395289184	CMakeFiles/philo.dir/main.c.o	23bc91d8bebabed5
+5	89	1706381446397289163	CMakeFiles/philo.dir/date_utils.c.o	94c0a6e80998379a
+5	92	1706381446403289098	CMakeFiles/philo.dir/philo_utils.c.o	2d040e0fb7ec5200
+5	95	1706381446406289066	CMakeFiles/philo.dir/routine.c.o	879761e9b5d09ce
+5	97	1706381446408289045	CMakeFiles/philo.dir/thread_utils.c.o	fc7f1b177d9dd560
+6	100	1706381446400289130	CMakeFiles/philo.dir/utils.c.o	e4f24fae0106f07b
+6	103	1706381446398289152	CMakeFiles/philo.dir/validate_input.c.o	af3040c544f2e10b
+104	132	1706381446453288564	philo	4f3d492ddead77bf
+6	113	1706383889941577430	CMakeFiles/philo.dir/thread_utils.c.o	fc7f1b177d9dd560
+5	120	1706383889941577430	CMakeFiles/philo.dir/date_utils.c.o	94c0a6e80998379a
+6	123	1706383889948577357	CMakeFiles/philo.dir/main.c.o	23bc91d8bebabed5
+6	126	1706383889946577378	CMakeFiles/philo.dir/philo_utils.c.o	2d040e0fb7ec5200
+6	129	1706383889953577304	CMakeFiles/philo.dir/routine.c.o	879761e9b5d09ce
+6	132	1706383889942577420	CMakeFiles/philo.dir/utils.c.o	e4f24fae0106f07b
+6	135	1706383889951577325	CMakeFiles/philo.dir/validate_input.c.o	af3040c544f2e10b
+135	176	1706383890010576706	philo	4f3d492ddead77bf
+6	41	1706384874989231771	CMakeFiles/philo.dir/main.c.o	23bc91d8bebabed5
+6	49	1706384874995231708	CMakeFiles/philo.dir/thread_utils.c.o	fc7f1b177d9dd560
+6	52	1706384874991231750	CMakeFiles/philo.dir/validate_input.c.o	af3040c544f2e10b
+6	55	1706384874999231666	CMakeFiles/philo.dir/routine.c.o	879761e9b5d09ce
+55	87	1706384875035231288	philo	4f3d492ddead77bf

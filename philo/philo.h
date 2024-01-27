@@ -26,8 +26,9 @@ typedef struct s_philosopher
 	long 			meals;
 	long 			last_meal;
 	pthread_t		thread;
-	pthread_mutex_t	l_fork;
+	pthread_mutex_t	*l_fork;
 	pthread_mutex_t	*r_fork;
+	pthread_mutex_t death;
 	t_table			*table;
 }	t_philosopher;
 
@@ -37,15 +38,20 @@ typedef struct s_input_info
 	long			time_to_die;
 	long			time_to_eat;
 	long			time_to_sleep;
-	int				n_times_philo_must_eat;
-	bool			finish;
+	long			minimum_meals;
+	int 			dead;
+	long 			all_full;
 	long 			start_time;
-	long 			current_time;
-	pthread_mutex_t access;
+	pthread_mutex_t print;
+	pthread_mutex_t mutex;
+	pthread_mutex_t *forks;
+	pthread_t 		checker;
+	t_philosopher	*philo;
 }	t_table;
 
 /* Main */
 int		main(int argc, char **argv);
+void	philo_free(t_table *table);
 
 /* Validate Input */
 void	p_error(t_error error);
@@ -55,35 +61,33 @@ bool	check_atoi(char **argv);
 void	check_input(int argc, char **argv);
 
 /* Utils */
-int		ft_atoi(char *str);
-long	ft_atol(char *str);
-long	get_long(t_philosopher *philo, long *data);
-bool	get_mutex_bool(t_philosopher *philo, bool *data);
+int		ft_atoi(const char *str);
+long	ft_atol(const char *str);
+int		print_status(t_philosopher *philo, char *status);
 
 /* Philosopher Utils */
-void	init_table(t_table *table, char **argv);
-void	init_philosophers(t_philosopher *philo, t_table *table);
+void			init_table(t_table *table, char **argv);
+t_philosopher	*init_philosophers(t_table *table);
+pthread_mutex_t *init_forks(int total_philos);
 
 /* Routine */
 void	*dinner(void *data);
-void	to_eat(t_philosopher *philo);
-void	to_think(t_philosopher *philo);
-void	to_sleep(t_philosopher *philo);
+int		grab_forks(t_philosopher *philo);
+int		go_eat(t_philosopher *philo);
+int		go_sleep(t_philosopher *philo);
+int		go_think(t_philosopher *philo);
 
 /* Threads Utils */
-void	creat_threads(t_philosopher *philo);
-void	join_threads(t_philosopher *philo);
-void	threads(t_philosopher *philo);
-
-/* Mutex Utils */
-
+void	init_threads(t_table *table);
+void	join_threads(t_table *table);
+void	*check_status(void *data);
+int		check_if_dead(t_table *table);
+int		check_if_ate(t_table *table);
 
 /* Date Utils */
-long	get_time(void);
-long	update_current_time(t_table *table);
-
-/* Free Memory */
-//void	free_struct_philosophers(t_table *table);
-
+long		get_time(void);
+long		current_time(long time);
+long int	get_time2(void);
+void		ft_usleep(long int miliseconds);
 
 #endif

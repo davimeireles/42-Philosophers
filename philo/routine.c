@@ -5,69 +5,89 @@ void	*dinner(void *data)
 	t_philosopher *philo;
 	philo = (t_philosopher *) data;
 
-	while (1)
+	if (philo->table->total_philos == 1)
 	{
-	printf("Philosopher ID is %d\nPhilosopher Meals is %ld\n",philo->id,philo->meals);
-	sleep(5);
+		pthread_mutex_lock(philo->l_fork);
+		if (print_status(philo,"has taken a fork"))
+			return (NULL);
+		pthread_mutex_unlock(philo->l_fork);
+		return (NULL);
 	}
-	/*	printf("Total Philosophers is %d\nTime to Die is %ld\nTime to Eat is %ld\n"
-		   "Time to Sleep is %ld\nEach Philosopher Must Eat %d Times\n"
-		   "Start Time is %ld\nCurrent Time is %ld\n",philo->table->total_philos,philo->table->time_to_die,philo->table->time_to_eat,
-		   philo->table->time_to_sleep,philo->table->n_times_philo_must_eat,philo->table->start_time,philo->table->current_time);*/
-/*	while(!get_mutex_bool(philo, &philo->table->finish))
+	if (philo->id % 2 == 0) {
+		usleep(10);
+	}
+	while(philo->table->dead == 0)
 	{
-		to_eat(philo);
-		sleep(2);
-		to_sleep(table);
-		sleep(2);
-		to_think(table);
-		sleep(2);
-	}*/
+		if (grab_forks(philo))
+			return (NULL);
+		if (go_eat(philo))
+			return (NULL);
+		if (go_sleep(philo))
+			return (NULL);
+		if (go_think(philo))
+			return (NULL);
+	}
+	return (NULL);
+}
+
+int	grab_forks(t_philosopher *philo)
+{
+	if (philo->id % 2)
+	{
+		pthread_mutex_lock(philo->r_fork);
+		print_status(philo, "has taken a fork");
+		pthread_mutex_lock(philo->l_fork);
+		print_status(philo, "has taken a fork");
+	}
+	else
+	{
+		pthread_mutex_lock(philo->l_fork);
+		if (print_status(philo, "has taken a fork"))
+			return (1);
+		pthread_mutex_lock(philo->r_fork);
+		if (print_status(philo, "has taken a fork"))
+			return (1);
+	}
 	return (0);
 }
 
-/*
-void	to_eat(t_philosopher *philo)
+int go_eat(t_philosopher *philo)
 {
-	pthread_mutex_lock(&philo->l_fork);
-	pthread_mutex_lock(philo->r_fork);
-	printf("Philosopher %d eating.\n",philo->id);
-	usleep(philo->table->time_to_eat);
-	pthread_mutex_unlock(&philo->l_fork);
+	pthread_mutex_lock(&philo->death);
+	if (print_status(philo, "is eating."))
+	{
+		pthread_mutex_unlock(philo->l_fork);
+		pthread_mutex_unlock(philo->r_fork);
+		pthread_mutex_unlock(&philo->death);
+		return (1);
+	}
+	pthread_mutex_unlock(&philo->death);
+	pthread_mutex_lock(&philo->table->mutex);
+	philo->last_meal = get_time();
+	philo->meals++;
+	if (philo->table->minimum_meals != -1)
+	{
+		if (philo->meals == philo->table->minimum_meals)
+			philo->table->all_full++;
+	}
+	pthread_mutex_unlock(&philo->table->mutex);
+	ft_usleep(philo->table->time_to_eat);
+	pthread_mutex_unlock(philo->l_fork);
 	pthread_mutex_unlock(philo->r_fork);
+	return (0);
 }
-*/
 
-/*
-void	to_think(t_philosopher *philo)
+int go_sleep(t_philosopher *philo)
 {
-	int i = 0;
-	pthread_mutex_lock(&table->access);
-	while (i < table->n_philosophers)
-	{
-		printf("Philosopher %d thinking.\n",table->philosophers[i].id);
-		i++;
-	}
-	pthread_mutex_unlock(&table->access);
+	if (print_status(philo, "is sleeping"))
+		return (1);
+	ft_usleep(philo->table->time_to_sleep);
+	return (0);
 }
 
-void	to_sleep(t_philosopher *philo)
+int	go_think(t_philosopher *philo)
 {
-	int i = 0;
-	pthread_mutex_lock(&table->access);
-	while (i < table->n_philosophers)
-	{
-		printf("Philosopher %d sleeping.\n",table->philosophers[i].id);
-		i++;
-	}
-	pthread_mutex_unlock(&table->access);
+	if (print_status(philo, "is thinking"))
+		return (1);
+	return (0);
 }
-*/
-
-/*
-		printf("Total Philosophers around the table is %d\n", table->n_philosophers);
-		printf("Philosopher Last Meal is %ld", table->philosophers->last_meal);
-		printf("Philosopher Started Time is %ld", table->start_time);
-		printf("Current Time is %ld\n", update_current_time(table));
-		usleep(1000000);
-*/

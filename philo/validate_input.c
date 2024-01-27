@@ -67,4 +67,5 @@ void	check_input(int argc, char **argv)
 		p_error(INVALID_PARAMETER);
 	if (!(check_atoi(argv)))
 		p_error(RANGE_OR_NEGATIVE);
+
 }

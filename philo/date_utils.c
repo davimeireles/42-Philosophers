@@ -20,13 +20,31 @@ long	get_time(void)
 	return ((time.tv_sec * 1000) + (time.tv_usec * 0.001));
 }
 
-long	update_current_time(t_table *table)
+long	current_time(long time)
 {
-	long	ret;
+	if (time > 0)
+		return (get_time() - time);
+	return (0);
+}
 
-	pthread_mutex_lock(&table->access);
-	ret = get_time() - table->start_time;
-	pthread_mutex_unlock(&table->access);
+long int	get_time2(void)
+{
+	struct timeval	ftime;
+	long int		time;
 
-	return (ret);
+	time = 0;
+	if (gettimeofday(&ftime, NULL))
+		return (-1);
+	time = (ftime.tv_sec * 1000) + (ftime.tv_usec / 1000);
+	return (time);
+}
+
+void	ft_usleep(long int miliseconds)
+{
+	long int	start;
+
+	start = 0;
+	start = get_time2();
+	while (get_time2() - start < miliseconds)
+		usleep(miliseconds / 10);
 }

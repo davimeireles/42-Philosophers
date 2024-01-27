@@ -12,20 +12,19 @@
 
 #include "philo.h"
 
+void	philo_free(t_table *table)
+{
+	free(table->philo);
+	free(table->forks);
+}
+
 int	main(int argc, char **argv)
 {
 	t_table table;
-	t_philosopher *philo;
 
 	check_input(argc, argv);
 	init_table(&table, argv);
-/*	printf("Total Philosophers is %d\nTime to Die is %ld\nTime to Eat is %ld\n"
-		   "Time to Sleep is %ld\nEach Philosopher Must Eat %d Times\n"
-		   "Start Time is %ld\nCurrent Time is %ld\n",table.total_philos,table.time_to_die,table.time_to_eat,
-		   table.time_to_sleep,table.n_times_philo_must_eat,table.start_time,table.current_time);*/
-	philo = malloc(sizeof(t_philosopher) * table.total_philos);
-	if (!philo)
-		return (0);
-	init_philosophers(philo, &table);
-	threads(philo);
+	init_threads(&table);
+	join_threads(&table);
+	philo_free(&table);
 }

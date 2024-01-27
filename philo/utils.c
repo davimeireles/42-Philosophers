@@ -1,6 +1,6 @@
 #include "philo.h"
 
-int	ft_atoi(char *str)
+int	ft_atoi(const char *str)
 {
 	int	i;
 	int	signal;
@@ -25,7 +25,7 @@ int	ft_atoi(char *str)
 	return (result * signal);
 }
 
-long	ft_atol(char *str)
+long	ft_atol(const char *str)
 {
 	int		i;
 	int		signal;
@@ -50,24 +50,21 @@ long	ft_atol(char *str)
 	return (result * signal);
 }
 
-long get_mutex_long(t_philosopher *philo, long *data)
+int	print_status(t_philosopher *philo, char *status)
 {
-	long ret;
+	long	current;
 
-	pthread_mutex_lock(&philo->table->access);
-	ret = *data;
-	pthread_mutex_unlock(&philo->table->access);
-
-	return (ret);
-}
-
-bool	get_mutex_bool(t_philosopher *philo, bool *data)
-{
-	bool ret;
-
-	pthread_mutex_lock(&philo->table->access);
-	ret = *data;
-	pthread_mutex_unlock(&philo->table->access);
-
-	return (ret);
+	pthread_mutex_lock(&philo->table->mutex);
+	if (philo->table->dead >= 1
+		|| philo->meals == philo->table->minimum_meals)
+	{
+		pthread_mutex_unlock(&philo->table->mutex);
+		return (1);
+	}
+	pthread_mutex_unlock(&philo->table->mutex);
+	pthread_mutex_lock(&philo->table->print);
+	current = current_time(philo->table->start_time);
+	printf("[%ld ms] [%d] %s\n", current, philo->id, status);
+	pthread_mutex_unlock(&philo->table->print);
+	return (0);
 }
