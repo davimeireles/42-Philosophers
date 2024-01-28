@@ -39,7 +39,7 @@
 				{
 					"directoryIndex" : 0,
 					"id" : "philo::@6890427a1f51a3e7e1df",
-					"jsonFile" : "target-philo-Debug-4ef5c587663ef276848f.json",
+					"jsonFile" : "target-philo-Debug-35e1a48b5f50551f5ab7.json",
 					"name" : "philo",
 					"projectIndex" : 0
 				}
@@ -49,12 +49,12 @@
 	"kind" : "codemodel",
 	"paths" : 
 	{
-		"build" : "/nfs/homes/dmeirele/sgoinfre/Rank-03/42-Philosophers/philo/cmake-build-debug",
-		"source" : "/nfs/homes/dmeirele/sgoinfre/Rank-03/42-Philosophers/philo"
+		"build" : "/nfs/homes/dmeirele/sgoinfre/Rank-03/philo2/philo/cmake-build-debug",
+		"source" : "/nfs/homes/dmeirele/sgoinfre/Rank-03/philo2/philo"
 	},
 	"version" : 
 	{
 		"major" : 2,
-		"minor" : 4
+		"minor" : 5
 	}
 }

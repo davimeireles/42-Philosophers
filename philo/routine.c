@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   routine.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dmeirele <dmeirele@student.42porto.com>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/01/28 18:32:31 by dmeirele          #+#    #+#             */
+/*   Updated: 2024/01/28 19:23:47 by dmeirele         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "philo.h"
 
 void	*dinner(void *data)
@@ -42,11 +54,9 @@ int	grab_forks(t_philosopher *philo)
 	else
 	{
 		pthread_mutex_lock(philo->l_fork);
-		if (print_status(philo, "has taken a fork"))
-			return (1);
+		print_status(philo, "has taken a fork");
 		pthread_mutex_lock(philo->r_fork);
-		if (print_status(philo, "has taken a fork"))
-			return (1);
+		print_status(philo, "has taken a fork");
 	}
 	return (0);
 }
@@ -54,7 +64,7 @@ int	grab_forks(t_philosopher *philo)
 int go_eat(t_philosopher *philo)
 {
 	pthread_mutex_lock(&philo->death);
-	if (print_status(philo, "is eating."))
+	if (print_status(philo, "is eating"))
 	{
 		pthread_mutex_unlock(philo->l_fork);
 		pthread_mutex_unlock(philo->r_fork);

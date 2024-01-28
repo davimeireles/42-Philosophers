@@ -1,4 +1,4 @@
-# Install script for directory: /nfs/homes/dmeirele/sgoinfre/Rank-03/42-Philosophers/philo
+# Install script for directory: /nfs/homes/dmeirele/sgoinfre/Rank-03/philo2/philo
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -50,5 +50,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "/nfs/homes/dmeirele/sgoinfre/Rank-03/42-Philosophers/philo/cmake-build-debug/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "/nfs/homes/dmeirele/sgoinfre/Rank-03/philo2/philo/cmake-build-debug/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   utils.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dmeirele <dmeirele@student.42porto.com>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/01/28 18:40:58 by dmeirele          #+#    #+#             */
+/*   Updated: 2024/01/28 18:51:30 by dmeirele         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "philo.h"
 
 int	ft_atoi(const char *str)
@@ -64,7 +76,7 @@ int	print_status(t_philosopher *philo, char *status)
 	pthread_mutex_unlock(&philo->table->mutex);
 	pthread_mutex_lock(&philo->table->print);
 	current = current_time(philo->table->start_time);
-	printf("[%ld ms] [%d] %s\n", current, philo->id, status);
+	printf("%ld %d %s\n", current, philo->id, status);
 	pthread_mutex_unlock(&philo->table->print);
 	return (0);
 }

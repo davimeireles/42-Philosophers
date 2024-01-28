@@ -42,17 +42,14 @@
 			"compileCommandFragments" : 
 			[
 				{
-					"fragment" : "-g -fdiagnostics-color=always"
-				},
-				{
-					"fragment" : "-std=gnu11"
+					"fragment" : "-g -std=gnu11 -fdiagnostics-color=always"
 				}
 			],
 			"includes" : 
 			[
 				{
 					"backtrace" : 2,
-					"path" : "/nfs/homes/dmeirele/sgoinfre/Rank-03/42-Philosophers/philo/."
+					"path" : "/nfs/homes/dmeirele/sgoinfre/Rank-03/philo2/philo/."
 				}
 			],
 			"language" : "C",

@@ -10,14 +10,14 @@
 				{
 					"includeDirectories" : 
 					[
-						"/usr/lib/gcc/x86_64-unknown-linux-gnu/12.2.0/include",
-						"/usr/lib/gcc/x86_64-unknown-linux-gnu/12.2.0/include-fixed",
+						"/usr/lib/gcc/x86_64-unknown-linux-gnu/13.2.0/include",
+						"/usr/lib/gcc/x86_64-unknown-linux-gnu/13.2.0/include-fixed",
 						"/usr/include/x86_64-linux-gnu",
 						"/usr/include"
 					],
 					"linkDirectories" : 
 					[
-						"/usr/lib/gcc/x86_64-unknown-linux-gnu/12.2.0",
+						"/usr/lib/gcc/x86_64-unknown-linux-gnu/13.2.0",
 						"/usr/lib/x86_64-linux-gnu",
 						"/usr/lib64",
 						"/lib/x86_64-linux-gnu",
@@ -36,7 +36,7 @@
 					]
 				},
 				"path" : "/usr/bin/cc",
-				"version" : "12.2.0"
+				"version" : "13.2.0"
 			},
 			"language" : "C",
 			"sourceFileExtensions" : 

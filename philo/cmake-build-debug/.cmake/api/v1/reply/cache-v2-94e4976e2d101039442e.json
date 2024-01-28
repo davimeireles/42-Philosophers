@@ -55,7 +55,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : "/nfs/homes/dmeirele/sgoinfre/Rank-03/42-Philosophers/philo/cmake-build-debug"
+			"value" : "/nfs/homes/dmeirele/sgoinfre/Rank-03/philo2/philo/cmake-build-debug"
 		},
 		{
 			"name" : "CMAKE_CACHE_MAJOR_VERSION",
@@ -79,7 +79,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : "24"
+			"value" : "26"
 		},
 		{
 			"name" : "CMAKE_CACHE_PATCH_VERSION",
@@ -91,7 +91,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : "2"
+			"value" : "4"
 		},
 		{
 			"name" : "CMAKE_COLOR_DIAGNOSTICS",
@@ -415,7 +415,7 @@
 				}
 			],
 			"type" : "STATIC",
-			"value" : "/nfs/homes/dmeirele/sgoinfre/Rank-03/42-Philosophers/philo/cmake-build-debug/CMakeFiles/pkgRedirects"
+			"value" : "/nfs/homes/dmeirele/sgoinfre/Rank-03/philo2/philo/cmake-build-debug/CMakeFiles/pkgRedirects"
 		},
 		{
 			"name" : "CMAKE_GENERATOR",
@@ -475,7 +475,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : "/nfs/homes/dmeirele/sgoinfre/Rank-03/42-Philosophers/philo"
+			"value" : "/nfs/homes/dmeirele/sgoinfre/Rank-03/philo2/philo"
 		},
 		{
 			"name" : "CMAKE_INSTALL_PREFIX",
@@ -759,7 +759,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : "/app/extra/clion/bin/cmake/linux/x64/share/cmake-3.24"
+			"value" : "/app/extra/clion/bin/cmake/linux/x64/share/cmake-3.26"
 		},
 		{
 			"name" : "CMAKE_SHARED_LINKER_FLAGS",
@@ -1019,7 +1019,7 @@
 				}
 			],
 			"type" : "STATIC",
-			"value" : "/nfs/homes/dmeirele/sgoinfre/Rank-03/42-Philosophers/philo/cmake-build-debug"
+			"value" : "/nfs/homes/dmeirele/sgoinfre/Rank-03/philo2/philo/cmake-build-debug"
 		},
 		{
 			"name" : "philo_IS_TOP_LEVEL",
@@ -1043,7 +1043,7 @@
 				}
 			],
 			"type" : "STATIC",
-			"value" : "/nfs/homes/dmeirele/sgoinfre/Rank-03/42-Philosophers/philo"
+			"value" : "/nfs/homes/dmeirele/sgoinfre/Rank-03/philo2/philo"
 		}
 	],
 	"kind" : "cache",

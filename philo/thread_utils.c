@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   thread_utils.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dmeirele <dmeirele@student.42porto.com>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/01/28 18:34:55 by dmeirele          #+#    #+#             */
+/*   Updated: 2024/01/28 18:44:33 by dmeirele         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "philo.h"
 
 void	init_threads(t_table *table)
@@ -28,9 +40,9 @@ void	join_threads(t_table *table)
 	while(i < table->total_philos)
 	{
 		pthread_mutex_destroy(&table->forks[i]);
-		pthread_mutex_destroy(&table->philo[i].death);
 		i++;
 	}
+	pthread_mutex_destroy(&table->philo->death);
 	pthread_mutex_destroy(&table->print);
 	pthread_mutex_destroy(&table->mutex);
 }
@@ -57,7 +69,7 @@ int	check_if_dead(t_table *table)
 	current = get_time();
 	while(i < table->total_philos)
 	{
-		pthread_mutex_lock(&table->philo[i].death);
+		pthread_mutex_lock(&table->philo->death);
 		pthread_mutex_lock(&table->mutex);
 		if (current - table->philo->last_meal > table->time_to_die)
 		{
@@ -66,11 +78,11 @@ int	check_if_dead(t_table *table)
 			pthread_mutex_lock(&table->mutex);
 			table->dead = 1;
 			pthread_mutex_unlock(&table->mutex);
-			pthread_mutex_unlock(&table->philo[i].death);
+			pthread_mutex_unlock(&table->philo->death);
 			return (1);
 		}
 		pthread_mutex_unlock(&table->mutex);
-		pthread_mutex_unlock(&table->philo[i].death);
+		pthread_mutex_unlock(&table->philo->death);
 		i++;
 	}
 	return (0);
@@ -81,7 +93,7 @@ int check_if_ate(t_table *table)
 	if (table->minimum_meals == -1)
 		return (0);
 	pthread_mutex_lock(&table->mutex);
-	if (table->all_full == table->minimum_meals)
+	if (table->all_full == table->total_philos)
 	{
 		pthread_mutex_unlock(&table->mutex);
 		return (1);
