@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   validate_input.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dmeirele <dmeirele@student.42porto.com>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/01/29 15:26:38 by dmeirele          #+#    #+#             */
+/*   Updated: 2024/01/29 15:37:11 by dmeirele         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "philo.h"
 
 void	p_error(t_error error)
@@ -8,8 +20,6 @@ void	p_error(t_error error)
 		printf("Invalid parameter, only numbers accepted.\n");
 	if (error == RANGE_OR_NEGATIVE)
 		printf("Number out of the MAX_INT range or its neg/null.\n");
-	if (error == MALLOC_ERROR)
-		printf("Error in creat of the malloc.\n");
 	exit(EXIT_FAILURE);
 }
 
@@ -31,8 +41,8 @@ bool	is_digit(char **argv)
 		j = 0;
 		while (argv[i][j])
 		{
-			if (!((argv[i][j] >= '0' && argv[i][j] <= '9') ||
-				argv[i][j] == '-' || argv[i][j] == '+'))
+			if (!((argv[i][j] >= '0' && argv[i][j] <= '9') || argv[i][j] == '-'
+					|| argv[i][j] == '+'))
 				return (false);
 			j++;
 		}
@@ -67,5 +77,4 @@ void	check_input(int argc, char **argv)
 		p_error(INVALID_PARAMETER);
 	if (!(check_atoi(argv)))
 		p_error(RANGE_OR_NEGATIVE);
-
 }

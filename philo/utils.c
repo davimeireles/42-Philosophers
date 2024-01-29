@@ -64,7 +64,7 @@ long	ft_atol(const char *str)
 
 int	print_status(t_philosopher *philo, char *status)
 {
-	long current;
+	long	current;
 
 	pthread_mutex_lock(&philo->table->mutex);
 	if (philo->table->dead == 1
@@ -78,5 +78,5 @@ int	print_status(t_philosopher *philo, char *status)
 	current = current_time(philo->table->start_time);
 	printf("%ld %d %s\n", current, philo->id, status);
 	pthread_mutex_unlock(&philo->table->print);
-	return 0;
+	return (0);
 }

@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   philo_utils.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dmeirele <dmeirele@student.42porto.com>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/01/29 15:34:14 by dmeirele          #+#    #+#             */
+/*   Updated: 2024/01/29 15:34:14 by dmeirele         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "philo.h"
 
-void	init_table(t_table	*table, char **argv)
+void	init_table(t_table *table, char **argv)
 {
 	table->total_philos = atoi(argv[1]);
 	table->time_to_die = atol(argv[2]);
@@ -19,16 +31,16 @@ void	init_table(t_table	*table, char **argv)
 	table->philo = init_philosophers(table);
 }
 
-pthread_mutex_t *init_forks(int total_philos)
+pthread_mutex_t	*init_forks(int total_philos)
 {
-	int i;
+	int				i;
 	pthread_mutex_t	*forks;
 
 	i = 0;
 	forks = malloc(sizeof(pthread_mutex_t) * total_philos);
 	if (!forks)
 		return (NULL);
-	while(i < total_philos)
+	while (i < total_philos)
 	{
 		pthread_mutex_init(&forks[i], 0);
 		i++;
@@ -38,8 +50,8 @@ pthread_mutex_t *init_forks(int total_philos)
 
 t_philosopher	*init_philosophers(t_table *table)
 {
-	int	i;
-	t_philosopher *philo;
+	int				i;
+	t_philosopher	*philo;
 
 	philo = malloc(sizeof(t_philosopher) * table->total_philos);
 	if (!philo)
@@ -51,7 +63,8 @@ t_philosopher	*init_philosophers(t_table *table)
 		philo[i].meals = 0;
 		philo[i].last_meal = get_time();
 		philo[i].l_fork = &table->forks[i];
-		if (table->total_philos != 1) {
+		if (table->total_philos != 1)
+		{
 			philo[i].r_fork = &table->forks[(i + 1) % table->total_philos];
 		}
 		philo[i].table = table;
@@ -59,4 +72,10 @@ t_philosopher	*init_philosophers(t_table *table)
 		i++;
 	}
 	return (philo);
+}
+
+void	free_forks(t_philosopher *philosopher)
+{
+	pthread_mutex_unlock(philosopher->l_fork);
+	pthread_mutex_unlock(philosopher->r_fork);
 }

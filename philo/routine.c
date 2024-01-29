@@ -6,7 +6,7 @@
 /*   By: dmeirele <dmeirele@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/28 18:32:31 by dmeirele          #+#    #+#             */
-/*   Updated: 2024/01/29 15:01:38 by dmeirele         ###   ########.fr       */
+/*   Updated: 2024/01/29 15:34:53 by dmeirele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,28 +14,27 @@
 
 void	*dinner(void *data)
 {
-	t_philosopher *philo;
-	philo = (t_philosopher *) data;
+	t_philosopher	*philo;
 
+	philo = (t_philosopher *)data;
 	if (philo->table->total_philos == 1)
 	{
 		pthread_mutex_lock(philo->l_fork);
-		print_status(philo,"has taken a fork");
+		print_status(philo, "has taken a fork");
 		pthread_mutex_unlock(philo->l_fork);
 		return (NULL);
 	}
-	if (philo->id % 2 == 0) {
+	if (philo->id % 2 == 0)
 		usleep(1000);
-	}
-	while(philo->table->dead == 0)
+	while (philo->table->dead == 0)
 	{
-		if(grab_forks(philo))
+		if (grab_forks(philo))
 			return (NULL);
-		if(go_eat(philo))
+		if (go_eat(philo))
 			return (NULL);
-		if(go_sleep(philo))
+		if (go_sleep(philo))
 			return (NULL);
-		if(go_think(philo))
+		if (go_think(philo))
 			return (NULL);
 	}
 	return (NULL);
@@ -68,15 +67,14 @@ int	grab_forks(t_philosopher *philo)
 	return (0);
 }
 
-int go_eat(t_philosopher *philo)
+int	go_eat(t_philosopher *philo)
 {
 	pthread_mutex_lock(&philo->table->mutex);
 	if (philo->table->dead >= 1
 		|| philo->table->all_full == philo->table->total_philos)
 	{
 		pthread_mutex_unlock(&philo->table->mutex);
-		pthread_mutex_unlock(philo->l_fork);
-		pthread_mutex_unlock(philo->r_fork);
+		free_forks(philo);
 		return (1);
 	}
 	pthread_mutex_unlock(&philo->table->mutex);
@@ -93,12 +91,11 @@ int go_eat(t_philosopher *philo)
 	pthread_mutex_unlock(&philo->table->mutex);
 	pthread_mutex_unlock(&philo->death);
 	ft_usleep(philo->table->time_to_eat);
-	pthread_mutex_unlock(philo->l_fork);
-	pthread_mutex_unlock(philo->r_fork);
+	free_forks(philo);
 	return (0);
 }
 
-int go_sleep(t_philosopher *philo)
+int	go_sleep(t_philosopher *philo)
 {
 	pthread_mutex_lock(&philo->table->mutex);
 	if (philo->table->dead >= 1

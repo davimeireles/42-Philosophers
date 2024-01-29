@@ -17,7 +17,7 @@ void	philo_free(t_table *table)
 	int	i;
 
 	i = 0;
-	while(i < table->total_philos)
+	while (i < table->total_philos)
 	{
 		pthread_mutex_destroy(&table->forks[i]);
 		pthread_mutex_destroy(&table->philo[i].death);
@@ -31,7 +31,7 @@ void	philo_free(t_table *table)
 
 int	main(int argc, char **argv)
 {
-	t_table table;
+	t_table	table;
 
 	check_input(argc, argv);
 	init_table(&table, argv);

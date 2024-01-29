@@ -19,7 +19,8 @@ void	init_threads(t_table *table)
 	i = 0;
 	while (i < table->total_philos)
 	{
-		pthread_create(&table->philo[i].thread, NULL, &dinner, &table->philo[i]);
+		pthread_create(&table->philo[i].thread, NULL, &dinner,
+			&table->philo[i]);
 		i++;
 	}
 	pthread_create(&table->checker, NULL, &check_status, table);
@@ -27,7 +28,7 @@ void	init_threads(t_table *table)
 
 void	join_threads(t_table *table)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	pthread_join(table->checker, 0);
@@ -40,12 +41,14 @@ void	join_threads(t_table *table)
 
 void	*check_status(void *data)
 {
-	t_table *table = (t_table *)data;
+	t_table	*table;
+
+	table = (t_table *)data;
 	while (1)
 	{
-		if(check_if_dead(table))
+		if (check_if_dead(table))
 			return (NULL);
-		if(check_if_ate(table))
+		if (check_if_ate(table))
 			return (NULL);
 	}
 	return (NULL);
@@ -53,12 +56,12 @@ void	*check_status(void *data)
 
 int	check_if_dead(t_table *table)
 {
-	int i;
-	long current;
+	int		i;
+	long	current;
 
 	i = 0;
 	current = get_time();
-	while(i < table->total_philos)
+	while (i < table->total_philos)
 	{
 		pthread_mutex_lock(&table->philo[i].death);
 		if (current - table->philo[i].last_meal >= table->time_to_die)
@@ -76,7 +79,7 @@ int	check_if_dead(t_table *table)
 	return (0);
 }
 
-int check_if_ate(t_table *table)
+int	check_if_ate(t_table *table)
 {
 	if (table->minimum_meals == -1)
 		return (0);
