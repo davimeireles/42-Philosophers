@@ -1,9 +1,0 @@
-# ninja log v5
-6	52	1706384874991231750	CMakeFiles/philo.dir/validate_input.c.o	af3040c544f2e10b
-6	132	1706383889942577420	CMakeFiles/philo.dir/utils.c.o	e4f24fae0106f07b
-5	120	1706383889941577430	CMakeFiles/philo.dir/date_utils.c.o	94c0a6e80998379a
-6	126	1706383889946577378	CMakeFiles/philo.dir/philo_utils.c.o	2d040e0fb7ec5200
-6	49	1706384874995231708	CMakeFiles/philo.dir/thread_utils.c.o	fc7f1b177d9dd560
-6	55	1706384874999231666	CMakeFiles/philo.dir/routine.c.o	879761e9b5d09ce
-55	87	1706384875035231288	philo	4f3d492ddead77bf
-6	41	1706384874989231771	CMakeFiles/philo.dir/main.c.o	23bc91d8bebabed5

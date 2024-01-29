@@ -6,7 +6,7 @@
 /*   By: dmeirele <dmeirele@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/28 18:34:55 by dmeirele          #+#    #+#             */
-/*   Updated: 2024/01/28 18:44:33 by dmeirele         ###   ########.fr       */
+/*   Updated: 2024/01/29 14:49:04 by dmeirele         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,15 +36,6 @@ void	join_threads(t_table *table)
 		pthread_join(table->philo[i].thread, 0);
 		i++;
 	}
-	i = 0;
-	while(i < table->total_philos)
-	{
-		pthread_mutex_destroy(&table->forks[i]);
-		i++;
-	}
-	pthread_mutex_destroy(&table->philo->death);
-	pthread_mutex_destroy(&table->print);
-	pthread_mutex_destroy(&table->mutex);
 }
 
 void	*check_status(void *data)
@@ -52,9 +43,9 @@ void	*check_status(void *data)
 	t_table *table = (t_table *)data;
 	while (1)
 	{
-		if (check_if_dead(table))
+		if(check_if_dead(table))
 			return (NULL);
-		if (check_if_ate(table))
+		if(check_if_ate(table))
 			return (NULL);
 	}
 	return (NULL);
@@ -69,20 +60,17 @@ int	check_if_dead(t_table *table)
 	current = get_time();
 	while(i < table->total_philos)
 	{
-		pthread_mutex_lock(&table->philo->death);
-		pthread_mutex_lock(&table->mutex);
-		if (current - table->philo->last_meal > table->time_to_die)
+		pthread_mutex_lock(&table->philo[i].death);
+		if (current - table->philo[i].last_meal >= table->time_to_die)
 		{
-			pthread_mutex_unlock(&table->mutex);
-			print_status(&table->philo[i], "died.");
+			print_status(&table->philo[i], "died");
 			pthread_mutex_lock(&table->mutex);
 			table->dead = 1;
 			pthread_mutex_unlock(&table->mutex);
-			pthread_mutex_unlock(&table->philo->death);
+			pthread_mutex_unlock(&table->philo[i].death);
 			return (1);
 		}
-		pthread_mutex_unlock(&table->mutex);
-		pthread_mutex_unlock(&table->philo->death);
+		pthread_mutex_unlock(&table->philo[i].death);
 		i++;
 	}
 	return (0);

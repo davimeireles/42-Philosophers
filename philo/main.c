@@ -14,6 +14,17 @@
 
 void	philo_free(t_table *table)
 {
+	int	i;
+
+	i = 0;
+	while(i < table->total_philos)
+	{
+		pthread_mutex_destroy(&table->forks[i]);
+		pthread_mutex_destroy(&table->philo[i].death);
+		i++;
+	}
+	pthread_mutex_destroy(&table->print);
+	pthread_mutex_destroy(&table->mutex);
 	free(table->philo);
 	free(table->forks);
 }

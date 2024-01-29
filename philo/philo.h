@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   philo.h                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dmeirele <dmeirele@student.42porto.com>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/01/29 12:58:54 by dmeirele          #+#    #+#             */
+/*   Updated: 2024/01/29 14:53:09 by dmeirele         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef PHILO_H
 # define PHILO_H
 
@@ -39,14 +51,14 @@ typedef struct s_input_info
 	long			time_to_eat;
 	long			time_to_sleep;
 	long			minimum_meals;
-	int 			dead;
 	long 			all_full;
+	int 			dead;
 	long 			start_time;
-	pthread_mutex_t print;
+	t_philosopher	*philo;
 	pthread_mutex_t mutex;
+	pthread_mutex_t print;
 	pthread_mutex_t *forks;
 	pthread_t 		checker;
-	t_philosopher	*philo;
 }	t_table;
 
 /* Main */

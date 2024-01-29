@@ -10,9 +10,9 @@ void	init_table(t_table	*table, char **argv)
 		table->minimum_meals = atoi(argv[5]);
 	else
 		table->minimum_meals = -1;
+	table->all_full = 0;
 	table->dead = 0;
 	table->start_time = get_time();
-	table->all_full = 0;
 	pthread_mutex_init(&table->print, 0);
 	pthread_mutex_init(&table->mutex, 0);
 	table->forks = init_forks(table->total_philos);
@@ -50,10 +50,11 @@ t_philosopher	*init_philosophers(t_table *table)
 		philo[i].id = i + 1;
 		philo[i].meals = 0;
 		philo[i].last_meal = get_time();
-		philo[i].table = table;
 		philo[i].l_fork = &table->forks[i];
-		if (table->total_philos != 1)
+		if (table->total_philos != 1) {
 			philo[i].r_fork = &table->forks[(i + 1) % table->total_philos];
+		}
+		philo[i].table = table;
 		pthread_mutex_init(&philo[i].death, 0);
 		i++;
 	}
