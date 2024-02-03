@@ -26,15 +26,15 @@ void	*dinner(void *data)
 	}
 	if (philo->id % 2 == 0)
 		usleep(1000);
-	while (philo->table->dead == 0)
+	while (1)
 	{
+		if (go_think(philo))
+			return (NULL);
 		if (grab_forks(philo))
 			return (NULL);
 		if (go_eat(philo))
 			return (NULL);
 		if (go_sleep(philo))
-			return (NULL);
-		if (go_think(philo))
 			return (NULL);
 	}
 	return (NULL);
@@ -97,6 +97,7 @@ int	go_eat(t_philosopher *philo)
 
 int	go_sleep(t_philosopher *philo)
 {
+	usleep(1000);
 	pthread_mutex_lock(&philo->table->mutex);
 	if (philo->table->dead >= 1
 		|| philo->table->all_full == philo->table->total_philos)
@@ -112,6 +113,7 @@ int	go_sleep(t_philosopher *philo)
 
 int	go_think(t_philosopher *philo)
 {
+	usleep(1000);
 	pthread_mutex_lock(&philo->table->mutex);
 	if (philo->table->dead >= 1
 		|| philo->table->all_full == philo->table->total_philos)

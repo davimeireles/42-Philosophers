@@ -1,7 +1,7 @@
 NAME= philo
-CC= gcc
-FLAGS= -Wall -Wextra -Werror -pthread -fsanitize=thread
-SOURCE= *.c
+CC= cc
+FLAGS= -Wall -Wextra -Werror -g -pthread -fsanitize=thread
+SOURCE= date_utils.c main.c philo_utils.c routine.c thread_utils.c utils.c validate_input.c
 OBJECT= $(SOURCE:.c=.o)
 RM= rm -rf
 

@@ -83,7 +83,7 @@ void							*dinner(void *data);
 int								grab_forks(t_philosopher *philo);
 int								go_eat(t_philosopher *philo);
 int								go_sleep(t_philosopher *philo);
-int								go_think(t_philosopher *philo);
+int								go_think(t_philosopher *philoz);
 /* Threads Utils */
 void							init_threads(t_table *table);
 void							join_threads(t_table *table);
